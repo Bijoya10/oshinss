@@ -1,9 +1,3 @@
-const Engine = Matter.Engine;
-const World= Matter.World;
-const Bodies = Matter.Bodies;
-
-
-
 var player;
 var edges;
 var boyImage,bacGImage,enemyImage,coronaImage,schoolImage,CCImage;
@@ -13,11 +7,11 @@ var wall1,wall2,wall3,wall4,wall5,wall6,wall7,wall8,wall9,wall10,wall11,wall12,w
 var edges;
 
 function preload(){
-bacGImage=loadImage("Pictures/Background.png");
-enemyImage=loadImage("Pictures/Antagonists.png");
-coronaImage=loadImage("Pictures/Corona.png");
-CCImage=loadImage("Pictures/Community Center.png")
-schoolImage=loadImage("Pictures/School Image.png")
+   bacGImage=loadImage("Pictures/Background.png");
+   enemyImage=loadImage("Pictures/Antagonists.png");
+   coronaImage=loadImage("Pictures/Corona.png");
+   CCImage=loadImage("Pictures/Community Center.png")
+   schoolImage=loadImage("Pictures/School Image.png")
 }
 function setup(){
     createCanvas(displayWidth-30,displayHeight-150);
@@ -39,18 +33,17 @@ function setup(){
     corona4.addImage(coronaImage);
     corona4.scale=0.1
 
-    engine = Engine.create();
-    world = engine.world;
+
 
   player=new Boy();
-  wall1=new Wall(50,100,200,20);
-  wall2=new Wall(350,100,20,200);
-  wall3=new Wall(250,250,20,300);
-  wall4=new Wall(550,450,20,500);
-  wall5=new Wall(250,650,300,20);
-  wall6=new Wall(200,550,20,100);
-  wall7=new Wall(350,450,20,200);
-  wall8=new Wall(735,275,20,200);
+  wall1=createSprite(50,100,200,20);
+  wall2=createSprite(350,100,20,200);
+  wall3=createSprite(250,250,20,300);
+  wall4=createSprite(550,450,20,500);
+  wall5=createSprite(250,650,300,20);
+  wall6=createSprite(200,550,20,100);
+  wall7=createSprite(350,450,20,200);
+  wall8=createSprite(735,275,20,200);
   /*wall9=new Wall();
   wall10=new Wall();
   wall11=new Wall();
@@ -63,42 +56,25 @@ function setup(){
    */
 }
 function draw(){
-    background(255,235,149);
+   background(255,235,149);
 
-  
- Engine.update(engine);
- player.display();
- player.control();
- wall1.display();
- wall2.display();
- wall3.display();
- wall4.display();
- wall5.display();
- wall6.display();
- wall7.display();
- wall8.display();
- /*wall9.display();
- wall10.display();
- wall11.display();
- wall12.display();
- wall13.display();
- wall14.display();
- wall15.display();
- wall16.display();
- */
-console.log(mouseX,mouseY);
-edges=createEdgeSprites();
+   player.display();
+   player.control();
+   
+   console.log(mouseX,mouseY);
+   edges=createEdgeSprites();
 
-corona1.bounceOff(edges);
-collision(player.boy,wall1);
-collision(player.boy,wall2);
-collision(player,wall3);
-collision(player,wall4);
-collision(player,wall5);
-collision(player,wall6);
-collision(player,wall7);
-collision(player,wall8);
-console.log(player.boy.height/2);
+   corona1.bounceOff(edges);
+   player.boy.collide(wall1)
+   player.boy.collide(wall2);
+   player.boy.collide( wall3);
+   player.boy.collide(wall4);
+   player.boy.collide(wall5);
+   player.boy.collide(wall6);
+   player.boy.collide(wall7);
+   player.boy.collide(wall8);
+   
+   console.log(player.boy.height/2);
 
    image(bacGImage,500,0,250,100);
    image(schoolImage,1005,610,250,100);
